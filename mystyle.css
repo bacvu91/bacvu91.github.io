@@ -1,0 +1,11 @@
+#container {
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+input {
+    width: 100px;
+}
+#result {
+    width: 100%;
+}
