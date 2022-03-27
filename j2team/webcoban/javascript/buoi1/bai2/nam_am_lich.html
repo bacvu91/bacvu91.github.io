@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tính năm âm lịch</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+</head>
+<body>
+    <div id="container">
+        <h1>Tính năm âm lịch</h1>
+        <form action="" id="form">
+            <div>
+                <p>Năm Dương lịch</p>
+                <input type="text" id="year" placeholder="2023"/> 
+            </div>
+            <button type="button" onclick="year_calculate()">=></button> 
+            <div>
+                <p>Năm Âm lịch</p>
+                <input id="result" type="text" readonly placeholder="Quý Mão">
+            </div>
+        </form>
+        <script>
+            function year_calculate(){
+                let year = parseInt(document.getElementById('year').value);
+                let can = 'aaaaaaaa';
+                let chi = 'bbbbbbbb';
+
+                switch((year-3)%10){
+                    case 0:
+                        can = "Quý";
+                    case 1:
+                        can = "Giáp";
+                    case 2:
+                        can = "Ất";
+                    case 3:
+                        can = "Bính";
+                    case 4:
+                        can = "Đinh";
+                    case 5:
+                        can = "Mậu";
+                    case 6:
+                        can = "Kỷ";
+                    case 7:
+                        can = "Canh";
+                    case 8:
+                        can = "Tân";
+                    case 9:
+                        can = "Nhâm";
+                        break;
+                    };
+                switch((year-3)%12){
+                    case 0:
+                        chi = "Hợi";
+                    case 1:
+                        chi = "Tý";
+                    case 2:
+                        chi = "Sửu";
+                    case 3:
+                        chi = "Dần";
+                    case 4:
+                        chi = "Mão";
+                    case 5:
+                        chi = "Thìn";
+                    case 6:
+                        chi = "Tỵ";
+                    case 7:
+                        chi = "Ngọ";
+                    case 8:
+                        chi = "Mùi";
+                    case 9:
+                        chi = "Thân";
+                    case 10:
+                        chi = "Dậu";
+                    case 11:
+                        chi = "Tuất";
+                        break;
+                    }; 
+
+
+                let result = `${can} ${chi}`;
+                        document.getElementById('result').value = result;
+            } 
+    
+        </script>
+    </div>
+</body>
+</html>
