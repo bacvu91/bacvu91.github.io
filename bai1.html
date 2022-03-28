@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Số này là số gì?</title>
+</head>
+<body>
+
+    <h1>Số này là số gì?</h1>
+    <br> 
+    <form>
+        <label for="input_number">Nhập vào số cần tính toán</label>    
+        <input type="number" id="input_number" placeholder="-17.55">
+        <button type="button" onclick="calculate()" id="enter">Press 'Enter'</button>
+    </form>
+
+    <br>
+
+    <div id="decimal"></div>
+    <div id="prime_number"></div>
+    <div id="counting_to_1"></div>
+    <div id="counting_trigger_times"></div>
+
+    <script>
+        //Trigger function by hitting the Enter key
+        var input = document.getElementById("input_number");
+        input.addEventListener("keydown", function(event) {
+            if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("enter").click();
+            return false;
+            }
+        });
+			
+        let callCount = 0;// Biến đếm số lần function đc gọi
+
+        function calculate(){
+
+            let number = parseFloat(document.getElementById('input_number').value);
+            document.getElementById('counting_to_1').innerHTML = '';
+
+            // kiểm tra số chẵn lẻ, số thập phân
+            if(Number.isInteger(number)){
+                if (number % 2 == 0){
+                        document.getElementById('decimal').innerHTML = number + ' là số chẵn';
+                    }
+                else{
+                        document.getElementById('decimal').innerHTML = number + ' là số lẻ';
+                    }
+            }
+            else {
+                document.getElementById('decimal').innerHTML = number + ' là số thập phân';
+            }
+        
+            // Kiểm tra số nguyên tố
+            var flag = true;
+            if (Number.isInteger(number) && number > 0){
+                if (number < 2){
+                    flag = false;
+                }
+                else{
+                    for (var i = 2; i < number-1; i++)
+                    {
+                        if (number % i == 0){
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                flag = false;
+            }
+            if (flag == true){
+                document.getElementById('prime_number').innerHTML = number + ' là số nguyên tố';
+            }
+            else{
+                document.getElementById('prime_number').innerHTML = number + ' không phải là số nguyên tố';
+            }
+
+            // In các số từ 1 tới số đó (*Từ số đó tới 1 nếu là số âm)
+            if(number>0){
+                // In các số nguyên từ 1 đến số đã nhập
+                for(let i = 1; i <= number ; i++){
+                    document.getElementById('counting_to_1').innerHTML +=(i + ' ');
+                }
+                // In số đã nhập nếu nó không phải số nguyên
+                if(Number.isInteger(number) === false)
+                    document.getElementById('counting_to_1').innerHTML +=(number);
+            } else{
+                // In số đã nhập nếu nó không phải số nguyên
+                if(Number.isInteger(number) === false)
+                    document.getElementById('counting_to_1').innerHTML +=(number + ' ');
+                // In các số nguyên từ số đã nhập đến 1
+                for(let i = 1; i >= number ; number++){
+                    document.getElementById('counting_to_1').innerHTML +=(Math.ceil(number) + ' ');
+                }
+            }
+
+            //In ra đã nhập bao nhiêu số
+ 
+            callCount += 1;
+            document.getElementById('counting_trigger_times').innerHTML = ('Bạn đã nhập ' + callCount +' số');
+        }
+    </script>
+
+</body>
+</html>
