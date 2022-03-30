@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Javascript - Array</title>
+</head>
+<body style="background-color:beige;">
+    <div id="container" style=" max-width: 500px; margin: 80px auto; background-color:lightgrey; padding: 40px; border-radius: 20px; overflow:auto;">
+        <form >
+            <label for="input">Nhập số</label>
+            <input type="number" id="input_number" name="input_number" placeholder="3184">
+            <button type="button" onclick="addToArray()" id="enter">Nhập</button>
+            <p id="notice">Chưa có số nào cả</p>
+
+            <br>
+            <button type="button" onclick="calculate()" id="">Tính toán</button>
+        </form> 
+        
+        <p>Số chẵn: <span id="even_number"></span></p>
+        <p>Số lẻ: <span id="odd_number"></span></p>
+        <p>Tổng: <span id="sum"></span></p>
+        <p>Số lớn nhất: <span id="largest"></span></p>
+        <p>Số nguyên tố: <span id="prime_numbers"></span></p>
+        <p>Tất cả các số đã nhập: <span id="number_color"></span></p>
+    </div>
+
+    <script>
+
+        //Khai báo mảng
+        let array_numbers = [];
+        let even_number = [];
+        let odd_numbers = [];
+
+        //Thêm input vào mảng
+        function addToArray(){
+            let input_number = parseInt( document.getElementById('input_number').value);
+            array_numbers.push(input_number);
+            document.getElementById('notice').innerHTML = ('Đã thêm '+ input_number + ' vào mảng')
+        }
+
+        //Tính toán
+        function calculate(){
+
+            //In ra số chẵn, số lẻ
+            let even_number = array_numbers.filter(number => {
+            return (number % 2 === 0);
+            });
+            even_number.forEach(function(number){
+                document.getElementById('even_number').innerHTML += number + ' '
+            })
+
+            let odd_number = array_numbers.filter(number => {
+            return number % 2 !== 0;
+            });
+            odd_number.forEach(function(number){
+                document.getElementById('odd_number').innerHTML += number + ' '
+            })
+
+            //Tính tổng
+            let sum = array_numbers.reduce((partialSum, a) => partialSum + a, 0);
+            document.getElementById('sum').innerHTML = sum;
+
+            //Số lớn nhất
+            document.getElementById('largest').innerHTML = (Math.max(...array_numbers));
+
+            //Số nguyên tố
+            prime_numbers = array_numbers.filter((number) => {
+                for (var i = 2; i <= Math.sqrt(number); i++) {
+                    if (number % i === 0) return false;
+                }
+                return true;
+            })
+            prime_numbers.forEach(function(number){
+                document.getElementById('prime_numbers').innerHTML += number + ' '
+            })
+
+
+            //Màu mè
+            document.getElementById('number_color').innerHTML = '';// Xóa trống 
+            array_numbers.forEach(function(z){
+            let color='white';
+            let string = z.toString();
+            switch(string.length){
+                case 1:
+                    color = '#00000'+string;
+                    break;
+                case 2:
+                    color = '#0000'+string;
+                    break;
+                case 3:
+                    color = '#000'+string;
+                    break;
+                case 4:
+                    color = '#00'+string;
+                    break;
+                case 5:
+                    color = '#0'+string;
+                    break;
+                default:
+                    color = '#'+ string.substr(string.length-6);
+            }
+            document.getElementById('number_color').innerHTML += '<span style="color:'+color +'">' +z+'</span>'+' '
+            })
+            
+    
+        }
+    </script>
+
+</body>
+</html>

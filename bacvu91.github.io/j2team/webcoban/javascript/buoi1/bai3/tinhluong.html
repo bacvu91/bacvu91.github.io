@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tính thuế thu nhập và lương ròng</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Tính thuế thu nhập và lương ròng</h1>
+        <form action="" id="form">
+
+            <p>Nhập vào lương của bạn</p>
+            <input type="text" id="luong" placeholder="10000000"/> 
+
+            <button type="button" onclick="profit()">Tính toán</button> 
+
+            <p>Thuế thu nhập</p>
+            <input id="thue" type="text" readonly placeholder="2000000">
+            <p>Lương thục nhận</p>
+            <input id="luongrong" type="text" readonly placeholder="8000000">
+        </form>
+        <script>
+            function profit(){
+                let luong = parseFloat(document.getElementById('luong').value);
+                let thue = 0;
+                let luongrong = 0;
+
+                if(luong < 7000000){
+                    thue = luong*0.1;
+                }
+                else if(luong < 15000000) {
+                    thue = luong*0.2;
+                }
+                else {
+                    thue = luong*0.3;
+                }
+                luongrong = luong - thue;
+                
+                document.getElementById('thue').value = thue;
+                document.getElementById('luongrong').value = luongrong;
+            } 
+    
+        </script>
+    </div>
+</body>
+</html>
