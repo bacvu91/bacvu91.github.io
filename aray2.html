@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Phát sinh mảng và tính toán</title>
+    </head>
+    <body style="background-color:beige;">
+        <div id="container" style=" max-width: 500px; margin: 80px auto; background-color:lightgrey; padding: 40px; border-radius: 20px; overflow:auto;">
+            <h2>Phát sinh mảng và tính toán</h2>
+        <form>
+            <label for="quantity">Nhập số phần tử:</label>
+            <input type="number" id="quantity" placeholder="27"></form>
+            <br>
+            <button type="button" onclick="calculate()" id="enter">Phát sinh và tính toán</button>
+        </form>
+
+        <p>Mảng: <span id="array"></span></p>
+        <p>GTLN (MAX) trong mảng: <span id="max"></span></p>
+        <p>GTNN (MIN) trong mảng: <span id="min"></span></p>
+        <p>Tổng mảng: <span id="sum"></span></p>
+
+        <script>
+            //Tạo mảng
+            function calculate(){
+                let z =  parseInt(document.getElementById('quantity').value);
+                let mang = [];
+                i = 0; 
+                while (i<z ){
+                    //Random số từ 1 đến 20
+                    var x = Math.floor(Math.random() * 21);
+                    mang.push(x)
+                    i++}
+                let max = Math.max(mang);
+
+            
+            mang.forEach(function(number){
+                document.getElementById('array').innerHTML += number+' ';
+            })
+            
+            document.getElementById('max').innerHTML = (Math.max(...mang));
+            document.getElementById('min').innerHTML = (Math.min(...mang));
+
+            let sum = mang.reduce((partialSum, a) => partialSum + a, 0);
+            document.getElementById('sum').innerHTML = sum;
+
+            }
+            
+        </script>
+        </div>
+    </body>
+</html>
