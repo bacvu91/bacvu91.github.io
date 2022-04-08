@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6549/6549034.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Validate </title>
+</head>
+<body style="background-color: thistle;">
+    <div id="container" style="width: 400px; margin: 200px auto">
+        <h1>Nhập thông tin</h1>
+        <form action="">
+            <label for="name">Tên:</label>
+            <input type="text" id="name"><span id="error_name"></span>
+            <br>
+            <br>
+
+            <label for="gender">Giới tính:</label>
+            <input type="radio" name="gender" value="male"> Nam
+            <input type="radio" name="gender" value="female"> Nữ
+            <span id="error_gender"></span><br><br>
+
+            <label for="address">Địa chỉ:</label>
+            <input type="text" id="address" name="address">
+            <span id="error_address"></span><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span id="error_email"></span><br><br>
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password">
+            <span id="error_password"></span><br><br> 
+
+            <label for="hobbies">Sở thích:</label>
+                <select name="hobbies" id="hobbies">
+                    <option value="hobby1">Sở thích 1</option>
+                    <option value="hobby2">Sở thích 2</option>
+                    <option value="hobby3">Sở thích 3</option>
+                    <option value="hobby4">Sở thích 4</option>
+                </select>
+            <br><br>
+
+            <button type="submit" onclick="return validate()">Kiểm tra</button>
+
+        </form>
+    </div>
+    <script>
+        function validate(){
+            let error_flag = false;
+
+            //Validate name
+            let name = document.getElementById('name').value;
+                if (name.length == 0){
+                    document.getElementById('error_name').innerHTML = ('Tên không thể để trống');
+                    error_flag = true;
+                }else{
+                    let regex_name = /^[A-EG-IK-VXYÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬẸẺẼÈÉÊỀẾỂỄỆÌÍỈỊĨÒÓỌỎÕÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦĐƯỨỪỬỮỰỲỴÝỶỸ][a-eg-ik-vxyàáảãạăắằẳẵặâấầẩẫậẹẻẽèéêềếểễệìíỉịĩòóọỏõôốồổỗộơớờởỡợùúũụủđưứừửữựỳỵýỷỹ]{0,6}(?: [A-EG-IK-VXYÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬẸẺẼÈÉÊỀẾỂỄỆÌÍỈỊĨÒÓỌỎÕÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦĐƯỨỪỬỮỰỲỴÝỶỸ][a-eg-ik-vxyàáảãạăắằẳẵặâấầẩẫậẹẻẽèéêềếểễệìíỉịĩòóọỏõôốồổỗộơớờởỡợùúũụủđưứừửữựỳỵýỷỹ]{0,6}){0,8}$^/
+                    if (regex_name.test(name)){
+                    document.getElementById('error_name').innerHTML = ('Tên không hợp lệ');
+                    }
+                    error_flag = true;
+                }
+            
+            //Check if gender is selected
+            let gender_array = document.getElementsByName('gender');
+            let gender_checked = false;
+                for(let i = 0; i < gender_array.length; i++){
+                    if(gender_array[i].checked){
+                        gender_checked = true;
+                    }
+                }
+
+                if(gender_checked == false){
+                    document.getElementById('error_gender').innerHTML = ('Bạn cần chọn giới tính');
+                    error_flag = true;
+                }
+
+            //Validate address
+            let address = document.getElementById('address').value;
+                if(address.length == 0){
+                    document.getElementById('error_address').innerHTML = ('Địa chỉ không thể để trống')
+                    error_flag = true;
+                } else{
+                    let regex_address = /^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*$/;
+                    if(regex_address.test(address) == false){
+                        document.getElementById('error_address').innerHTML = ('Địa chỉ không hợp lệ');
+                        error_flag = true;
+                    }
+                }
+                
+            //Validate email
+            let email = document.getElementById('email').value;
+                if(email.length == 0){
+                    document.getElementById('error_email').innerHTML = ('Email không được để trống')
+                    error_flag = true;
+                }else{
+                    let regex_email = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/;
+                    if(regex_email.test(email)){
+                        document.getElementById('error_email').innerHTML = ('Email không hợp lệ');
+                        error_flag = true;
+                    }
+                }
+            
+            //Validate password
+            let password = document.getElementById('password').value;
+
+                if(password.length == 0) {  
+                    document.getElementById("error_password").innerHTML = "Vui lòng nhập mật khẩu";  
+                    error_flag = true; 
+                } else if(password.length < 8) {  
+                    document.getElementById("error_password").innerHTML = "Mật khẩu quá ngắn";  
+                    error_flag = true; 
+                } else if(password.length > 20) {  
+                    document.getElementById("error_password").innerHTML = "Mật khẩu quá dài";  
+                    error_flag = true;   
+                } else {  
+                    let regex_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,20}$/;  
+                    if (regex_password.test(password) == false){
+                        document.getElementById('error_password').innerHTML = ('Mật khẩu không hợp lệ')
+                        error_flag = true;  
+                    }
+                }  
+
+            if (error_flag){
+                return false
+            }
+        }
+    </script>
+</body>
+</html>
