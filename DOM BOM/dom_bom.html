@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1828/1828640.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Get Facebook username/ID</title>
+</head>
+<body style="background-color: thistle;">
+
+    <div id="container" style="width: 600px; margin: 200px auto">
+        <h1>Get Facebook ID</h1>
+        <form >
+            <label for="name">Fill in a Facebook URL:</label>
+            <input type="text" id="url">
+            <p>
+                Examples:
+                <ul>
+                    <li> https://www.facebook.com/j2teamnnl/</li>
+                    <li> https://www.facebook.com/groups/j2team.community/</li>
+                    <li> https://www.facebook.com/profile.php?id=100048240755558</li>
+                </ul>
+            </p>
+            <button type="button" onclick="fbcheck()">Get ID</button>
+        </form>
+        <p>Result: <span id="url_id" class="error"></span></p>
+    </div>
+    <script>
+        function fbcheck(){
+            let url = document.getElementById('url').value;
+            let regex1 = /(?:^https:\/\/www\.facebook\.com\/)(?:groups\/?|profile\.php\?id=?|)([a-z0-9_\.]+)(?:\/|$)/gm;
+            let result = regex1.exec(url);
+            if(result === null){
+                document.getElementById("url_id").innerHTML = ('Invalid URL');
+                document.getElementsByClassName("error")[0].style.color = "red";
+            } else {
+                document.getElementsByTagName("span")[0].innerHTML = (result[1]);
+                document.getElementsByTagName("span")[0].style.color = "green";
+            }
+        }
+    </script>
+</body>
+</html>
